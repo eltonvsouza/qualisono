@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+<f:loadBundle basename="message" var="inter" />
+<rich:jQuery timing="onload" selector="#{usuarioBean.foco}" query="focus()" />
+<h:panelGrid columns="2">
+	<h:outputText value="*#{inter.usuario}" style="float: right;"/>
+	<h:inputText value="#{usuarioBean.usuario.usuario}" maxlength="10" disabled="#{usuarioBean.disable}" style=" width : 100px;" id="usuario"/>
+   	
+	<h:outputText value="*#{inter.nome}" style="float: right;"/>
+	<h:inputText value="#{usuarioBean.usuario.nome}" maxlength="100" style=" width : 200px;" id="nome"/>
+	
+	<h:outputText value="#{inter.email}" style="float: right;"/>
+	<h:inputText value="#{usuarioBean.usuario.email}" maxlength="20" style=" width : 100px;" id="email"/>
+
+	<h:outputText id="grupo" value="#{inter.grupo}" style="float: right;"/>
+	<h:selectOneMenu  value="#{usuarioBean.usuario.grupo}" disabled="false" style="width : 200px;" >
+						<f:selectItems value="#{geralBean.getListaGeralGrupo('grupousuario')}" />
+	</h:selectOneMenu>
+
+	<h:outputText value="*#{inter.senha}" style="float: right;"/>
+	<h:inputSecret value="#{usuarioBean.usuario.senha}" maxlength="10" style=" width : 100px;" disabled="#{usuarioBean.disable}" id="senha"
+														required="true"
+													  	validatorMessage="Campo Senha: Tamanho mínimo de 5 caracteres"
+													 	requiredMessage="Campo Senha: Obrigatório">
+	<f:validateLength minimum="5" maximum="10"/>
+ 	</h:inputSecret>
+	
+	<h:outputText value="*#{inter.confirmacaosenha}" style="float: right;"/>
+	<h:inputSecret value="#{usuarioBean.senhaConfirmacao}" maxlength="10" style=" width : 100px;" disabled="#{usuarioBean.disable}" id="confirmacaoSenha"
+														   required="true"
+														   validatorMessage="Campo Confirmação da Senha: Tamanho mínimo de 5 caracteres"
+													 	   requiredMessage="Campo Confirmação da Senha: Obrigatório">
+	<f:validateLength minimum="5" maximum="10"/>
+ 	</h:inputSecret>
+</h:panelGrid>
+</html>

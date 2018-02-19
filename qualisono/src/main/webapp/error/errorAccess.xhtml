@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+<head>
+	<title>QUAKISONO - Pagina de Erro</title>
+	<meta http-equiv="Content-Language" content="English" />
+	<meta http-equiv="Pragma" content="No-cache"/>
+	<meta http-equiv="Cache-Control" content="no-store,No-cache,must-revalidate,post-check=0,pre-check=0,max-age=0"/>
+	<meta http-equiv="Expires" content="-1"/> 
+	<link rel="stylesheet" type="text/css" href="#{inter.confcss}" media="screen" />
+	<link rel="shortcut icon" href="../#{inter.iconcama}" type="image/icon"/>
+	<f:loadBundle basename="message" var="inter" />
+</head>
+<body topmargin="0" leftmargin="0">
+		<div id="imgheadleft">
+    		<img src="#{inter.imgheadleft}" width="220" height="100"/>
+   		</div>
+   		<div id="headcenter">
+   			<h:panelGrid style="position: absolute;top: 70%;">
+	           	<h:outputText value="Bem vindo #{loginBean.usuario.usuario}" id="bemvindo" style="font-family:arial;font-size:12px;font-weight: bold;"/>
+   			</h:panelGrid>
+		</div>
+		<rich:menuItem submitMode="none" value="Sair" onclick="document.location.href='../j_spring_security_logout'"
+			icon="#{inter.iconsair}" style="position:absolute;top:7%;right:25%;" />
+   		<div id="imgnome">
+	   		<img src="#{inter.imgnome}" width="283" height="69"/>
+   		</div>
+   		<div id="menutop">
+   			<img src="#{inter.imgmenutop}" width="175" height="25"/>
+   		</div>
+   		<div id="menu">
+   		</div>
+   		<div id="menubottom">
+   			<img src="#{inter.imgmenubottom}" width="175" height="25"/>
+   		</div>
+   		<div id="conteudo" align="center">
+	   		<h:panelGrid columns="2" style="margin-top: 100px;">
+				<h:graphicImage value="#{inter.iconaccess}" width="100px"/>
+				<h:panelGrid columns="1" style="text-align:center;">
+					<h:outputText value="ACESSO NEGADO" style="font-size:20px;"/>
+					<h:outputText value="Entre em contato com o Administrador do sistema e solicite o acesso" style="font-size:10px;"/>
+				</h:panelGrid>
+	   		</h:panelGrid>
+	   		<div id="rodape" style="margin-top: 379px;" align="center">
+	   			<font size="1" face="Arial, Helvetica, sans-serif">&copy; 
+	            	Copyright [Your Name]. All Rights Reserved.
+	            </font>
+	       	</div>
+   		</div>
+</body>
+</html>

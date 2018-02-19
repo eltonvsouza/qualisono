@@ -1,0 +1,44 @@
+#imgheadleft{
+	position:absolute;
+}
+#headcenter{
+	position:absolute;
+	z-index:-1;
+	background-color:#9CBDDE;
+	width:100%;
+	height:69px;
+	text-align:left;
+}
+#imgnome{
+	position:absolute;
+	left: 75%;
+}
+#menutop{
+	position:relative;
+	top:100px;
+}
+#menu{
+	position:relative;
+	top:100px;
+}
+#menubottom{
+	position:relative;
+	top:100px;
+}
+#conteudo{
+	position:absolute;
+	top:100px;
+	left:200px;
+	width:80%;
+	height: 500px;
+}
+#rodape{
+	position:relative;
+}
+
+body {margin:0; padding:0; border:0;}
+
+/* Caledário sem exibir os dias */
+.special tr[id]{
+		display:none;
+}

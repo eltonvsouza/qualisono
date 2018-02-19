@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+<ui:composition template="/tela/template.xhtml">
+	<ui:define name="titulo"><h:outputText value="#{inter.tsistema} - #{inter.tlistar} - #{inter.tagenda}" /></ui:define>
+	<ui:define name="conteudo">
+		<f:loadBundle basename="message" var="inter" />
+		<h:form id="form1">
+			<rich:panel style=" width : 610px; heigth:300px; margin-left : auto; margin-right : auto;" id="panel1">
+				<f:facet name="header">
+					<h:outputText value="#{inter.tlistar} - #{inter.tagenda}" id="id1"/>
+				</f:facet>
+				<a4j:outputPanel ajaxRendered="true">
+	       			<rich:dataTable value="#{agendaBean.agendas}" var="agenda" id="lista" reRender="ds" rows="12" width="553px"
+	       				onRowMouseOver="this.style.backgroundColor='#F8F8F8'"
+	       				onRowMouseOut="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'">
+	                    <f:facet name="header">
+		       				<rich:columnGroup id="colg1">
+			       				<rich:column id="colh1">
+				                        <h:outputText value="Assunto" id="id2"/>
+			       				</rich:column>
+		                        <rich:column id="colh3">
+			                        <h:outputText value="Data/Hora" id="id4"/>
+				                </rich:column>
+				                <rich:column id="colh4">
+			                        <h:outputText value="E-Mail" id="id5"/>
+		                        </rich:column>
+		                        <rich:column id="colh8">
+			                        <h:outputText value="Alterar" id="id9"/>
+		                        </rich:column>
+		                        <rich:column id="colh9">
+			                        <h:outputText value="Excluir" id="id10"/>
+		                        </rich:column>
+	                        </rich:columnGroup>
+                    	</f:facet>
+		                <rich:column filterBy="#{agenda.assunto}" filterEvent="onkeyup" style="text-align:right" width="50px" label="Assunto" id="col2">
+		                	<f:facet name="filterValueInput">
+		                		<h:inputText style="width:50px;"/>
+		                	</f:facet>
+		                    <h:outputText value="#{agenda.assunto}" id="assunto"/>
+		                </rich:column>
+		                <rich:column filterBy="#{agenda.datahora}" filterEvent="onchanged" style="text-align:center;" width="70px" label="Data" id="col1">
+		                	<f:facet name="filterValueInput">
+		                		<rich:calendar datePattern="yyyy-MM-dd" inputSize="7"/>
+		                	</f:facet>
+		                    <h:outputText value="#{agenda.datahora}" id="data">
+		                    	<f:convertDateTime pattern="dd/MM/yyyy - HH:mm:ss" timeZone="America/Recife"/>
+		                    	
+		                    </h:outputText>
+			            </rich:column>
+		                <rich:column filterBy="#{agenda.email}" style="text-align:right" filterEvent="onkeyup" width="50px" label="E-Mail" id="col3">
+		                <f:facet name="filterValueInput">
+		                		<h:inputText style="width:50px;"/>
+		                	</f:facet>
+		                    <h:outputText value="#{agenda.email}" id="email"/>
+		                </rich:column>
+						<rich:column width="45px" style="text-align:center" id="col8">
+							<a4j:commandLink ajaxSingle="true" action="#{agendaBean.carregarAlterar}" style="text-decoration:none;" id="cl1">
+								<f:setPropertyActionListener value="#{agenda.codigo}" target="#{agendaBean.idBusca}"/>
+								<h:graphicImage style="border:0; width:16px;" value="#{inter.iconeditar}" id="gi1"/>
+							</a4j:commandLink>
+						</rich:column>
+	           			<rich:column width="45px" style="text-align:center" id="col9">
+							<a4j:commandLink action="#{modalPanelQuestion.setaAtributos}" oncomplete="Richfaces.showModalPanel('mpQuestion')" style="margin-left:auto; margin-right:auto;" id="cl2">
+								<f:setPropertyActionListener value="#{agenda.codigo}" target="#{agendaBean.idBusca}" />
+								<f:setPropertyActionListener value="agenda" target="#{modalPanelQuestion.entidade}" />
+								<f:setPropertyActionListener value="Excluir" target="#{modalPanelQuestion.tipo}" />
+								<h:graphicImage style="border-width:0; left:50%; right:50%; width:16px;" value="#{inter.iconlixeira}" id="gi2"/>
+							</a4j:commandLink>
+						</rich:column>
+						<f:facet name="footer">
+			            	<rich:datascroller for="lista" maxPages="20" id="ds" reRender="lista"/>
+						</f:facet>
+			        </rich:dataTable>
+			        </a4j:outputPanel>
+            	<ui:include src="/tela/mensagem/mensagem.xhtml" />
+            	<h:commandLink style="float:center;" id="pdf" action="#{agendaBean.relatorioGeral}">
+		        	<h:graphicImage style="border-width:0; left:50%; right:50%; width:30px;" value="#{inter.iconimpressora}" id="gi3"/>
+		        </h:commandLink>
+       			<rich:toolTip value="Imprimir em PDF" for="pdf" followMouse="true" id="tt1"/>
+			</rich:panel>
+		</h:form>
+		<ui:include src="/tela/mpQuestion.xhtml" />
+	</ui:define>
+</ui:composition>
+</html>

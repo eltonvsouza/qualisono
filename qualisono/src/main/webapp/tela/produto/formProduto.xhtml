@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+<f:loadBundle basename="message" var="inter" />
+<rich:jQuery timing="onload" selector="#codprod" query="focus()" />
+	<h:panelGrid columns="2">
+		<h:outputText value="*#{inter.codigo}" style="float: right;"/>
+		<h:inputText value="#{produtoBean.produto.codprod}" maxlength="10" style="width:65px; align:left;" id="codprod"
+			converterMessage="Campo Código: Apenas números são aceitos"/>
+		<h:outputText value="*#{inter.descricao}" style="float: right;"/>
+		<h:inputText value="#{produtoBean.produto.descricao}" maxlength="60" style="width:250px; align:left;" id="descricao"/>
+		<h:outputText value="*#{inter.medida} 1" style="float: right;"/>
+		<h:inputText value="#{produtoBean.produto.medida1}" maxlength="20" style=" width:125px; align:left;" id="medida1"/>
+		<h:outputText value="*#{inter.medida} 2" style="float: right;"/>
+		<h:inputText value="#{produtoBean.produto.medida2}" maxlength="20" style=" width:125px; align:left;" id="medida2"/>
+		<h:outputText value="*#{inter.fornecedor}" style="float: right;"/>
+		<h:selectOneMenu value="#{produtoBean.produto.fornecedor}" id="fornecedor" converter="entityConverter" style="width:250px;">
+			<f:selectItems value="#{fornecedorBean.listaFornecedor}"/>
+		</h:selectOneMenu>
+		<h:outputText value="*#{inter.vcompra}" style="float: right;" />
+		<h:inputText value="#{produtoBean.produto.vcompra}"
+			maxlength="8" style=" width : 75px;" id="vcompra"
+			converter="doubleConverter"
+			converterMessage="Campo #{inter.vcompra}: Formato inválido" />
+		<h:outputText value="*#{inter.vvenda}" style="float: right;" />
+		<h:inputText value="#{produtoBean.produto.vvenda}"
+			maxlength="8" style=" width : 75px;" id="vvenda"
+			converter="doubleConverter"
+			converterMessage="Campo #{inter.vvenda}: Formato inválido" />
+		<h:outputText value="*#{inter.icmscompra}" style="float: right;" />
+		<h:inputText value="#{produtoBean.produto.icmscompra}"
+			maxlength="8" style=" width : 75px;" id="icmscompra"
+			converter="doubleConverter"
+			converterMessage="Campo #{inter.icmscompra}: Formato inválido" />
+		<h:outputText value="*#{inter.icmssubst}" style="float: right;" />
+		<h:inputText value="#{produtoBean.produto.icmssubst}"
+			maxlength="8" style=" width : 75px;" id="icmssubst"
+			converter="doubleConverter"
+			converterMessage="Campo #{inter.icmssubst}: Formato inválido" />
+	</h:panelGrid>
+</html>

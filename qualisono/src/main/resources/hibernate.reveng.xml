@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+<!--	<table-filter match-catalog="qualisono" match-name="agenda"/>-->
+<!--	<table-filter match-catalog="qualisono" match-name="cliente"/>-->
+<!--	<table-filter match-catalog="qualisono" match-name="compra"/>-->
+<!--	<table-filter match-catalog="qualisono" match-name="compraitem"/>-->
+<!--	<table-filter match-catalog="qualisono" match-name="configuracao"/>-->
+<!--	<table-filter match-catalog="qualisono" match-name="contasapagar"/>-->
+<!--	<table-filter match-catalog="qualisono" match-name="fornecedor"/>-->
+<!--	<table-filter match-catalog="qualisono" match-name="funcionario"/>-->
+<!--	<table-filter match-catalog="qualisono" match-name="geral"/>-->
+<!--	<table-filter match-catalog="qualisono" match-name="parcelasapagar"/>-->
+<!--	<table-filter match-catalog="qualisono" match-name="produto"/>-->
+<!--	<table-filter match-catalog="qualisono" match-name="tipofuncionario"/>-->
+<!--	<table-filter match-catalog="qualisono" match-name="transportadora"/>-->
+<!--	<table-filter match-catalog="qualisono" match-name="uf"/>-->
+<!--	<table-filter match-catalog="qualisono" match-name="unidade"/>-->
+<!--	<table-filter match-catalog="qualisono" match-name="usuario"/>-->
+<!--	<table-filter match-catalog="qualisono" match-name="venda"/>-->
+<!--	<table-filter match-catalog="qualisono" match-name="vendaitem"/>-->
+</hibernate-reverse-engineering>

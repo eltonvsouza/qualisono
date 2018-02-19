@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<f:subview
+	  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"> 
+	<a4j:form>
+		<rich:modalPanel id="mpQuestion" width="350" height="100">
+	      	<f:facet name="header">
+	            <h:panelGroup>
+	                <h:outputText value="QUALISONO - Mensagem"></h:outputText>
+	            </h:panelGroup>
+	        </f:facet>
+	    	<a4j:outputPanel ajaxRendered="true">
+				<h:outputText value="#{modalPanelQuestion.mensagem}"></h:outputText>
+			</a4j:outputPanel>
+			<br/><br/>
+			<a4j:commandButton onclick="Richfaces.hideModalPanel('mpQuestion');" value="Não" style="width:70px; float:right;"/>
+			<rich:spacer width="5px"/>
+			<a4j:commandButton reRender="lista" onclick="Richfaces.hideModalPanel('mpQuestion');" action="#{modalPanelQuestion.acao}" value="Sim" style="width:70px; float:right;"/>
+			<br/>
+	    </rich:modalPanel>
+		</a4j:form>
+</f:subview>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+	
+<ui:composition template="/tela/template.xhtml">
+	<ui:define name="titulo">CENG - Listar - Configuração do Sistema</ui:define>
+	<ui:define name="conteudo">
+		<f:loadBundle basename="message" var="inter" />
+		<h:form>
+			<rich:panel style=" width : 425px; margin-left : auto; margin-right : auto;">
+				<f:facet name="header">
+					<h:outputText value="Listar - Configuração do Sistema"/>
+				</f:facet>
+				<a4j:outputPanel ajaxRendered="true">
+	       			<rich:dataTable border="0" align="center" width="400px" id="lista" value="#{configuracaoBean.configuracoes}" var="configuracao" rows="10" 
+				       				onRowMouseOver="this.style.backgroundColor='#F8F8F8'"
+				       				onRowMouseOut="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'">
+	       				<f:facet name="header">
+	               			<rich:columnGroup>
+	                   			<rich:column>
+	                   				<h:outputText value="Grupo" />
+	               				</rich:column>
+	               				<rich:column>
+	                   				<h:outputText value="Tipo" />
+	                   			</rich:column>
+	                   			<rich:column>
+	                   				<h:outputText value="Valor" />
+	                   			</rich:column>
+	                   			<rich:column>
+	                   				<h:outputText value="Alterar" />
+	                   			</rich:column>
+	                   			<rich:column>
+	                   				<h:outputText value="Excluir" />
+	                   			</rich:column>
+	               			</rich:columnGroup>
+	           			</f:facet>
+						<rich:column width="40px">
+	               			<h:outputText value="#{configuracao.grupo}" />
+	           			</rich:column>
+	           			<rich:column width="40px">
+	               			<h:outputText value="#{configuracao.tipo}" />
+	           			</rich:column>
+	           			<rich:column width="200px">
+	               			<h:outputText value="#{configuracao.valor}" />
+	           			</rich:column>
+	           			<rich:column width="40px" style="text-align:center">
+							<a4j:commandLink ajaxSingle="true" action="#{configuracaoBean.carregarAlterar}" style="text-decoration:none;">
+								<f:setPropertyActionListener value="#{configuracao.codigo}" target="#{configuracaoBean.idBusca}" />
+								<h:graphicImage style="border:0; width:16px;" value="#{inter.iconeditar}" />
+							</a4j:commandLink>
+						</rich:column>
+	           			<rich:column width="40px" style="text-align:center">
+							<a4j:commandLink action="#{modalPanelQuestion.setaAtributos}" oncomplete="Richfaces.showModalPanel('mpQuestion')" style="margin-left:auto; margin-right:auto;">
+								<f:setPropertyActionListener value="#{configuracao.codigo}" target="#{configuracaoBean.idBusca}" />
+								<f:setPropertyActionListener value="configuracao" target="#{modalPanelQuestion.entidade}" />
+								<f:setPropertyActionListener value="Excluir" target="#{modalPanelQuestion.tipo}" />
+								<h:graphicImage style="border-width:0; left:50%; right:50%; width:16px;" value="#{inter.iconlixeira}" />
+							</a4j:commandLink>
+						</rich:column>
+			        </rich:dataTable>
+		        </a4j:outputPanel>
+            	<rich:datascroller for="lista" maxPages="20" id="ds" />
+            	<ui:include src="/tela/mensagem/mensagem.xhtml" />
+<!--            	<center>-->
+		        <h:commandLink style="float:center;" id="pdf" action="#{configuracaoBean.relatorioGeral}">
+		        	<h:graphicImage style="border-width:0; left:50%; right:50%; width:30px;" value="#{inter.iconimpressora}" />
+		        </h:commandLink>
+       			<rich:toolTip value="Imprimir em PDF" for="pdf" followMouse="true"/>
+<!--            	</center>-->
+			</rich:panel>
+		</h:form>
+		<ui:include src="/tela/mpQuestion.xhtml" />
+	</ui:define>
+</ui:composition>
+</html>

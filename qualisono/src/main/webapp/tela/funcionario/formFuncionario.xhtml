@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+<!-- MÁSCARAS rich:JQuery -->
+<rich:jQuery query="mask('(99)9999-9999')" selector="#telefone" timing="onload" />
+<rich:jQuery query="mask('(99)9999-9999')" selector="#telefone2" timing="onload" />
+<rich:jQuery query="mask('99999-999')" selector="#cep" timing="onload" />
+<rich:jQuery query="mask('99.999.999/9999-99')" selector="#inscestadual" timing="onload" />
+<!-- MÁSCARA dinâmica do campo inscrição -->
+<a4j:outputPanel id="panelMask">
+	<h:panelGroup rendered="#{funcionarioBean.funcionario.tipo == 'cnpj'}">
+		<rich:jQuery query="mask('99.999.999/9999-99')" timing="onload" selector="#cpfcnpj"/>
+	</h:panelGroup>
+	<h:panelGroup rendered="#{funcionarioBean.funcionario.tipo == 'cpf'}">
+		<rich:jQuery query="mask('999.999.999-99')" selector="#cpfcnpj"/>
+	</h:panelGroup>
+	<rich:jQuery timing="onload" selector="#cpfcnpj" query="focus()" />
+</a4j:outputPanel>
+<f:loadBundle basename="message" var="inter" />
+<rich:jQuery timing="onload" selector="#cpfcnpj" query="focus()" />
+<h:panelGrid columns="2" style="valign:top;">
+	<rich:simpleTogglePanel	switchType="client" label="Dados Pessoais" height="445px" width="395px" >
+		<h:panelGrid columns="2">
+			<h:outputText value="*#{inter.tipo}" style="float: right;"/>
+			<h:selectOneRadio value="#{funcionarioBean.funcionario.tipo}" id="tipo">
+				<a4j:support event="onclick" ajaxSingle="true" reRender="panelMask, panelInscr" />
+			    <f:selectItem itemLabel="CNPJ" itemValue="cnpj"/>
+			    <f:selectItem itemLabel="CPF" itemValue="cpf"/>
+			</h:selectOneRadio>
+			<h:outputText value="*#{inter.cpfcnpj}" style="float: right;"/>
+			<a4j:outputPanel id="panelInscr">
+				<h:inputText value="#{funcionarioBean.funcionario.cpfcnpj}" maxlength="18" style=" width:100px; align:left;" id="cpfcnpj"/>
+			</a4j:outputPanel>
+			<h:outputText value="#{inter.inscestadual}" style="float: right;"/>
+			<h:inputText value="#{funcionarioBean.funcionario.inscestadual}" maxlength="14" style=" width:100px; align:left;" id="inscestadual"/>
+			<h:outputText value="#{inter.rg}" style="float: right;"/>
+			<h:inputText value="#{funcionarioBean.funcionario.rg}" maxlength="10" style=" width:65px; align:left;" id="rg"/>
+			<h:outputText value="#{inter.dataexpedrg}" style="float: right;" />
+			<a4j:outputPanel id="dataexpedrg" layout="block">
+				<rich:calendar value="#{funcionarioBean.funcionario.dataexpedRg}"
+					datePattern="dd/MM/yyyy" cellWidth="24px" cellHeight="22px"
+					style="width:200px" inputSize="7"/>
+			</a4j:outputPanel>
+			<h:outputText value="*#{inter.nome}" style="float: right;"/>
+			<h:inputText value="#{funcionarioBean.funcionario.nome}" maxlength="200" style=" width:250px; align:left;" id="nome"/>
+			<h:outputText value="#{inter.razaosocial}" style="float: right;"/>
+			<h:inputText value="#{funcionarioBean.funcionario.razaosocial}" maxlength="200" style=" width:250px; align:left;" id="razaosocial"/>
+			<h:outputText value="#{inter.telefone}" style="float: right;"/>
+			<h:inputText value="#{funcionarioBean.funcionario.telefone}" maxlength="13" style=" width:75px; align:left;" id="telefone"/>
+			<h:outputText value="#{inter.telefone}" style="float: right;"/>
+			<h:inputText value="#{funcionarioBean.funcionario.telefone2}" maxlength="13" style=" width:75px; align:left;" id="telefone2"/>
+			<h:outputText value="#{inter.contato}" style="float: right;"/>
+			<h:inputText value="#{funcionarioBean.funcionario.contato}" maxlength="50" style=" width:250px; align:left;" id="contato"/>
+			<h:outputText value="#{inter.email}" style="float: right;"/>
+			<h:inputText value="#{funcionarioBean.funcionario.email}" maxlength="20" style=" width:250px; align:left;" id="email"/>
+			<h:outputText value="#{inter.datanascimento}" style="float: right;"/>
+			<a4j:outputPanel id="datanascimento" layout="block">
+				<rich:calendar value="#{funcionarioBean.funcionario.datanascimento}"
+					datePattern="dd/MM/yyyy" cellWidth="24px" cellHeight="22px"
+					style="width:200px" inputSize="7"/>
+			</a4j:outputPanel>
+			<h:outputText value="#{inter.datacadastro}" style="float: right;"/>
+			<a4j:outputPanel id="datacadastro" layout="block">
+				<rich:calendar value="#{funcionarioBean.funcionario.datacadastro}"
+					datePattern="dd/MM/yyyy" cellWidth="24px" cellHeight="22px"
+					style="width:200px" disabled="true" inputSize="7"/>
+			</a4j:outputPanel>
+			<h:outputText value="*#{inter.tipofuncionario}" style="float: right;" />
+			<h:selectOneMenu value="#{funcionarioBean.funcionario.tipofuncionario}" 
+				id="tipofuncionario" style=" width : 150px;" converter="entityConverter">
+				<f:selectItems value="#{tipoFuncionarioBean.listaTipoFuncionario}"/>
+				<a4j:support event="onchange" action="#{funcionarioBean.setarComissao}" reRender="comissao"/>
+			</h:selectOneMenu>
+			<h:outputText value="*#{inter.comissao}" style="float: right;"/>
+			<h:inputText value="#{funcionarioBean.comissao} %" disabled="true" rendered="true" style=" width:50px; align:left;" id="comissao"/>
+			<h:outputText value="*#{inter.ativo}" style="float: right;" />
+			<h:selectBooleanCheckbox value="#{funcionarioBean.funcionario.ativo}" />
+		</h:panelGrid>
+	</rich:simpleTogglePanel>
+	<rich:simpleTogglePanel	switchType="client" label="Endereço" height="255px" width="395px">
+		<h:panelGrid columns="2">
+			<h:outputText value="#{inter.cep}" style="float: right;" />
+			<h:inputText value="#{funcionarioBean.funcionario.cep}" maxlength="9"
+				style=" width : 55px;" id="cep">
+<!--				<a4j:support id="carregarEndereco"-->
+<!--					action="#{trabalhadorBean.carregarEndereco}" event="onblur"-->
+<!--					reRender="logradouro, bairro, cidade, uf, pais, enderecoFoco" />-->
+			</h:inputText>
+			<h:outputText value="#{inter.pais}" style="float: right;" />
+			<h:inputText value="#{funcionarioBean.funcionario.pais}"
+				maxlength="50" style=" width : 150px;" id="pais"
+				disabled="#{trabalhadorBean.disableEndereco}" />
+			<h:outputText value="#{inter.cidade}" style="float: right;" />
+			<h:inputText value="#{funcionarioBean.funcionario.cidade}"
+				maxlength="100" style=" width : 150px;" id="cidade"
+				disabled="#{trabalhadorBean.disableEndereco}" />
+			<h:outputText value="#{inter.bairro}" style="float: right;" />
+			<h:inputText value="#{funcionarioBean.funcionario.bairro}"
+				maxlength="100" style=" width : 150px;" id="bairro"
+				disabled="#{trabalhadorBean.disableEndereco}" />
+			<h:outputText value="#{inter.logradouro}" style="float: right;" />
+			<h:inputText value="#{funcionarioBean.funcionario.logradouro}"
+				maxlength="100" style=" width : 250px;" id="logradouro"
+				disabled="#{trabalhadorBean.disableEndereco}" />
+			<h:outputText value="#{inter.numero}" style="float: right;" />
+			<h:inputText value="#{funcionarioBean.funcionario.numero}"
+				maxlength="5" style=" width : 33px;" id="numero"
+				converterMessage="Campo Número: Apenas números são aceitos" />
+			<h:outputText value="#{inter.complemento}" style="float: right;" />
+			<h:inputText value="#{funcionarioBean.funcionario.complemento}"
+				maxlength="100" style=" width : 150px;" id="complemento"/>
+			<h:outputText value="#{inter.uf}" style="float: right;" />
+			<h:selectOneMenu value="#{funcionarioBean.funcionario.uf}" id="uf">
+				<f:selectItems value="#{ufBean.listaUf}" />
+			</h:selectOneMenu>
+			<h:outputText value="#{inter.pontoref}" style="float: right;"/>
+			<h:inputText value="#{funcionarioBean.funcionario.pontoref}" maxlength="200" style=" width:250px; align:left;" id="pontoref"/>
+		</h:panelGrid>
+	</rich:simpleTogglePanel>
+</h:panelGrid>
+</html>

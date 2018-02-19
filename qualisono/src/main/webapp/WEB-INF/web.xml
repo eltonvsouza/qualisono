@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+							http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+		version="2.4" id="WebApp_ID">
+	<display-name>qualisono</display-name>
+
+	<!--
+		#################### CONFIGURAÇÃO DO SPRING ####################
+	-->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:/applicationContext.xml,classpath:/security-applicationContext.xml</param-value>
+	</context-param>
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+	</listener>
+	
+	<!--
+		########### SPRING SECURITY 3 ###########
+	-->
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+	
+	<!--
+		#################### CONFIGURAÇÃO DO RICHFACES ####################
+	-->
+	<context-param>
+		<param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+<!--		<param-value>server</param-value>-->
+		 <param-value>client</param-value> 
+	</context-param>
+
+	<context-param>
+		<param-name>org.richfaces.SKIN</param-name>
+<!--			<param-value>blueSky</param-value> -->
+<!--			<param-value>laguna</param-value>-->
+<!--			<param-value>darkX</param-value> -->
+<!--			<param-value>glassX</param-value> -->
+			<param-value>classic</param-value> 
+<!--			<param-value>wine</param-value>  -->
+<!--			<param-value>deepMarine</param-value>  -->
+<!--			<param-value>emeraldTown</param-value>  -->
+<!--			<param-value>sakura</param-value> -->
+<!--			<param-value>plain</param-value>  -->
+<!--			<param-value>default</param-value>  -->
+<!--			<param-value>japanCherry</param-value>-->
+<!--			<param-value>ruby</param-value>-->
+	</context-param>
+
+	<context-param>
+		<param-name>org.richfaces.CONTROL_SKINNING</param-name>
+		<param-value>enable</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>org.ajax4jsf.VIEW_HANDLERS</param-name>
+		<param-value>com.sun.facelets.FaceletViewHandler</param-value>
+	</context-param>
+	
+	<filter>
+		<display-name>RichFaces Filter</display-name>
+		<filter-name>richfaces</filter-name>
+		<filter-class>org.ajax4jsf.Filter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>richfaces</filter-name>
+		<servlet-name>Faces Servlet</servlet-name>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>INCLUDE</dispatcher>
+	</filter-mapping>
+
+	<!--
+		#################### CONFIGURAÇÃO DO MYFACES ####################
+	-->
+
+	<context-param>
+		<param-name>org.apache.myfaces.NUMBER_OF_VIEWS_IN_SESSION</param-name>
+		<param-value>20</param-value>
+	</context-param>
+	<context-param>
+		<param-name>org.apache.myfaces.SERIALIZE_STATE_IN_SESSION</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	<context-param>
+		<param-name>org.apache.myfaces.COMPRESS_STATE_IN_SESSION</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	<context-param>
+		<param-name>org.apache.myfaces.ALLOW_JAVASCRIPT</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	<context-param>
+		<param-name>org.apache.myfaces.DETECT_JAVASCRIPT</param-name>
+		<param-value>false</param-value>
+	</context-param>
+	<context-param>
+		<param-name>org.apache.myfaces.PRETTY_HTML</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	<context-param>
+		<param-name>org.apache.myfaces.AUTO_SCROLL</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	<context-param>
+		<param-name>org.apache.myfaces.SECRET</param-name>
+		<param-value>NzY1NDMyMTA=</param-value>
+	</context-param>
+	<context-param>
+		<param-name>org.apache.myfaces.algorithm</param-name>
+		<param-value>AES</param-value>
+	</context-param>
+	<context-param>
+		<param-name>org.apache.myfaces.algorithm.parameters</param-name>
+		<param-value>CBC/PKCS5Padding</param-value>
+	</context-param>
+	<context-param>
+		<param-name>org.apache.myfaces.algorithm.iv</param-name>
+		<param-value>NzY1NDMyMTA3NjU0MzIxMA==</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>org.apache.myfaces.VALIDATE</param-name>
+		<param-value>true</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>org.apache.myfaces.READONLY_AS_DISABLED_FOR_SELECTS</param-name>
+		<param-value>true</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>org.apache.myfaces.ADD_RESOURCE_CLASS</param-name>
+		<param-value>
+			org.apache.myfaces.renderkit.html.util.DefaultAddResource
+		</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>org.apache.myfaces.RESOURCE_VIRTUAL_PATH</param-name>
+		<param-value>/faces/myFacesExtensionResource</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>org.apache.myfaces.CHECK_EXTENSIONS_FILTER</param-name>
+		<param-value>true</param-value>
+	</context-param>
+
+	<!--
+		#################### CONFIGURAÇÃO DO FACELETS ####################
+	-->
+
+	<context-param>
+		<param-name>javax.faces.FACELETS_SKIP_COMMENTS</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	<context-param>
+		<param-name>javax.faces.FACELETS_REFRESH_PERIOD</param-name>
+		<param-value>6</param-value>
+	</context-param>
+	
+	<!-- Use Documents Saved as *.xhtml -->
+	<context-param>
+		<param-name>javax.faces.DEFAULT_SUFFIX</param-name>
+		<param-value>.xhtml</param-value>
+	</context-param>
+
+
+	<!-- #################### CONFIGURAÇÃO DO JSF #################### -->
+
+	<!-- Faces Servlet -->
+	<servlet>
+		<servlet-name>Faces Servlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<!-- Faces Servlet Mapping -->
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.jsf</url-pattern>
+	</servlet-mapping>
+
+	<context-param>
+		<param-name>javax.faces.PROJECT_STAGE</param-name>
+		<param-value>Development</param-value>
+	</context-param>
+	<context-param>     
+	    <param-name>com.sun.faces.expressionFactory</param-name>
+	    <param-value>org.jboss.el.ExpressionFactoryImpl</param-value>   
+	</context-param>
+
+	<!--
+		############# PÁGINAS QUE DEVEM SER ABERTAS AO EXECUTAR O PROJETO #############
+	-->
+
+	<!-- ########### TEMPO PARA ESPIRAR A SESSÃO ########### -->
+	<session-config>
+		<session-timeout>30</session-timeout>
+<!-- 		<session-timeout>1</session-timeout> -->
+	</session-config>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+
+	<!-- ########### SE NÃO ESTIVER LOGADO REDIRECIONA ########### -->
+    <error-page>
+       <exception-type>org.springframework.security.access.AccessDeniedException</exception-type>
+       <location>/error/errorAccess.jsf</location>
+	</error-page>
+	<description>caso de uma java.lang.SecurityException ele redireciona para a página de login da aplicação.</description>
+	<error-page>
+		<exception-type>java.lang.SecurityException</exception-type>
+		<location>/error/errorAccess.jsf</location>
+	</error-page>
+	<error-page>    
+        <exception-type>java.lang.Exception</exception-type>    
+        <location>/error/errorPage.jsf?erro=PROBLEMA AO EXIBIR A PÁGINA</location>    
+    </error-page>
+<!--    <error-page>-->
+<!--        <error-code>403</error-code>    -->
+<!--        <location>/error/errorAccess.xhtml</location>    -->
+<!--    </error-page>-->
+    <error-page>    
+        <exception-type>404</exception-type>    
+        <location>/error/errorPage.jsf?erro=ESTA PÁGINA NÃO EXISTE</location>    
+    </error-page>
+    <error-page>    
+        <exception-type>500</exception-type>    
+        <location>/error/errorPage.jsf?erro=ERRO INTERNO DO SERVIDOR</location>    
+    </error-page>
+    <error-page>    
+        <exception-type>503</exception-type>    
+        <location>/error/errorPage.jsf?erro=O SERVIDOR ESTÁ INDISPONÍVEL NO MOMENTO</location>    
+    </error-page>
+    <error-page>    
+        <exception-type>java.sql.SQLException?erro=PROBLEMA AO ESTABELECER CONEXÃO COM O BANCO DE DADOS</exception-type>    
+        <location>/error/errorPage.jsf</location>    
+    </error-page>
+    <error-page>    
+        <exception-type>org.hibernate.exception.GenericJDBCException</exception-type>    
+        <location>/error/errorBanco.jsf</location>    
+    </error-page>
+    <error-page>    
+        <exception-type>org.hibernate.util.JDBCExceptionReporter</exception-type>    
+        <location>/error/errorBanco.jsf</location>    
+    </error-page>
+    <error-page>    
+        <exception-type>com.mysql.jdbc.exceptions.jdbc4.CommunicationsException</exception-type>    
+        <location>/error/errorBanco.jsf</location>    
+    </error-page>
+    <error-page>    
+        <exception-type>org.hibernate.cfg.SettingsFactory</exception-type>    
+        <location>/error/errorBanco.jsf</location>    
+    </error-page>
+</web-app>

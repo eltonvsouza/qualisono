@@ -1,0 +1,21 @@
+qualisono/12345
+elton/elton1982
+
+reidasmotos.no-ip.info
+administrador/qaz123
+
+jose candido da silva neto/joao23
+
+tela envio de e-mail para pessoa ou grupo (monitor, pre-distribuidor, ...)
+
+
+### hospedagem ###
+http://eltonvs.s155.eatj.com/
+http://eltonvs.s155.eatj.com/ceng/
+manager/meueatj
+http://s155.eatj.com/myacct.jsp
+
+### Base de cálculo ICMS ###
+Valor da mercadoria: R$ 1.000,00
+Valor do frete (cobrado do adquirente): R$ 100,00
+Base de cálculo = R$ 1.000,00 + R$ 100,00 = R$ 1.100,00.

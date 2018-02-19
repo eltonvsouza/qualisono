@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<faces-config version="1.2" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xi="http://www.w3.org/2001/XInclude"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd">
+	
+	
+		
+	<!-- CONFIGURAÇÃO DO FACELETS -->
+	<application>
+<!--		<view-handler>com.sun.facelets.FaceletViewHandler</view-handler>-->
+		<view-handler>org.ajax4jsf.application.AjaxViewHandler</view-handler>
+		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+
+		<locale-config>  
+			<default-locale>pt_BR</default-locale>  
+			<supported-locale>pt_BR</supported-locale>
+		</locale-config>
+		<message-bundle>message_pt_BR</message-bundle>  
+	</application>
+	
+	<!-- RESOLVE O PROBLEMA DE CACHE WYCIWYG -->
+	<lifecycle>
+	    <phase-listener id="nocache">br.com.util.CacheControlPhaseListener</phase-listener>
+	</lifecycle>
+
+	<!-- CONVERTER GENÉRICO -->
+	<converter> 
+		<converter-id>entityConverter</converter-id> 
+		<converter-class>br.com.converter.EntityConverter</converter-class> 
+	</converter>
+	<converter> 
+        <converter-id>doubleConverter</converter-id> 
+        <converter-class>br.com.converter.DoubleConverter</converter-class> 
+	</converter>
+	<converter> 
+        <converter-id>doubleConverterDigits</converter-id> 
+        <converter-class>br.com.converter.DoubleConverterDigits</converter-class> 
+	</converter>
+	<converter> 
+        <converter-id>simpleIndexConverter</converter-id> 
+        <converter-class>br.com.converter.SimpleIndexConverter</converter-class> 
+	</converter>
+</faces-config>

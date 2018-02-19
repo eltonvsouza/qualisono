@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<b:beans xmlns="http://www.springframework.org/schema/security"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:b="http://www.springframework.org/schema/beans"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+							http://www.springframework.org/schema/beans/spring-beans.xsd
+							http://www.springframework.org/schema/security
+                            http://www.springframework.org/schema/security/spring-security-3.0.xsd">
+ 
+<!--   #####################   CONFIGURAÇÃO SPRING SECURITY 3   #####################   -->
+	<global-method-security secured-annotations="enabled" />
+
+	<http auto-config="true" access-denied-page="/error/errorAccess.jsp">
+<!--		<intercept-url pattern="/tela/admin/**" access="ROLE_ADMIN"/>-->
+		<intercept-url pattern="/tela/**" access="ROLE_ADMIN,ROLE_USER"/>
+        <form-login login-page="/login.jsf" authentication-failure-url="/login.jsf?erro=true"/>
+        <logout invalidate-session="true" logout-success-url="/login.jsf"/>
+    </http>
+
+    <authentication-manager>
+        <authentication-provider>
+        	<password-encoder hash="sha-256"/>
+            <jdbc-user-service data-source-ref="dataSource"
+               users-by-username-query="SELECT usuario, senha, 'true' FROM usuario WHERE usuario=?"
+               authorities-by-username-query="SELECT usuario as username, grupo as authority FROM usuario WHERE usuario=?"
+            />
+        </authentication-provider>
+    </authentication-manager>
+
+    <b:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
+        <b:property name="url" value="jdbc:mysql://localhost:3306/qualisono" />
+        <b:property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <b:property name="username" value="root" />
+        <b:property name="password" value="root" />
+    </b:bean>
+</b:beans>

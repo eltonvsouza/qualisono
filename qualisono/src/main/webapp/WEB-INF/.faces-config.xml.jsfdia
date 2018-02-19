@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM
+  NAME="rules:#src#main#webapp#telas#usuario#listarUsuario.xhtml"
+  PATH="/src/main/webapp/telas/usuario/listarUsuario.xhtml"
+  SHAPE="512,208,50,25" model-entity="JSFProcessGroup" persistent="true"/>
+</PROCESS>

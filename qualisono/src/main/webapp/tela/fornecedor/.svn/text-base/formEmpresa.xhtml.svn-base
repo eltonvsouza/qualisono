@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+	
+<a4j:outputPanel id="enderecoFoco" >
+	<rich:jQuery timing="onload" selector="#{empresaBean.foco}" query="focus()"/>
+</a4j:outputPanel>
+<!-- MÁSCARAS rich:JQuery -->
+<rich:jQuery query="mask('(99)9999-9999')" selector="#telefone" timing="onload" />
+<rich:jQuery query="mask('(99)9999-9999')" selector="#celular" timing="onload" />
+<rich:jQuery query="mask('99999-999')" selector="#cep" timing="onload" />
+<rich:jQuery query="mask('99.999.999/9999-99')" selector="#iestadual" timing="onload" />
+<!-- MÁSCARA dinâmica do campo inscrição -->
+<a4j:outputPanel id="panelMask">
+	<h:panelGroup rendered="#{empresaBean.empresa.tipo == 'cnpj'}">
+		<rich:jQuery query="mask('99.999.999/9999-99')" timing="onload" selector="#inscricao"/>
+	</h:panelGroup>
+	<h:panelGroup rendered="#{empresaBean.empresa.tipo == 'cei'}">
+		<rich:jQuery query="mask('999.999.99.99/99')" selector="#inscricao"/>
+	</h:panelGroup>
+	<h:panelGroup rendered="#{empresaBean.empresa.tipo == 'cpf'}">
+		<rich:jQuery query="mask('999.999.999-99')" selector="#inscricao"/>
+	</h:panelGroup>
+	<rich:jQuery timing="onload" selector="#inscricao" query="focus()" />
+</a4j:outputPanel>
+<f:loadBundle basename="message" var="inter" />
+<center>
+<rich:simpleTogglePanel switchType="client" label="Dados Pessoais" height="205px" width="400px">
+	<h:panelGrid columns="2">
+		<h:outputText value="*#{inter.tipo}" style="float: right;"/>
+		<h:selectOneRadio value="#{empresaBean.empresa.tipo}" id="tipo">
+			<a4j:support event="onclick" ajaxSingle="true" reRender="panelMask, panelInscr" />
+		    <f:selectItem itemLabel="CNPJ" itemValue="cnpj"/>
+		    <f:selectItem itemLabel="CEI" itemValue="cei"/>
+		    <f:selectItem itemLabel="CPF" itemValue="cpf"/>
+		</h:selectOneRadio>
+		<h:outputText value="*#{inter.inscricao}" style="float: right;"/>
+		<a4j:outputPanel id="panelInscr">
+			<h:inputText value="#{empresaBean.empresa.inscricao}" maxlength="18" style=" width:100px; align:left;" id="inscricao"/>
+		</a4j:outputPanel>
+		<h:outputText value="#{inter.rasaosocial}" style="float: right;"/>
+		<h:inputText value="#{empresaBean.empresa.rasaosocial}" maxlength="100" style=" width:250px; align:left;" id="rasaosocial"/>
+		<h:outputText value="*#{inter.nome}" style="float: right;"/>
+		<h:inputText value="#{empresaBean.empresa.nome}" maxlength="200" style=" width:250px; align:left;" id="nome"/>
+	
+		<h:outputText value="*#{inter.cnaefiscal}" style="float: right;"/>
+		<h:inputText value="#{empresaBean.empresa.cnaefiscal}" maxlength="7" style=" width : 45px;" id="cnaefiscal"
+									  					 	   converterMessage="Campo CNAE/Fiscal: Apenas números são aceitos">
+		</h:inputText>
+		<h:outputText value="*#{inter.fpas}" style="float: right;"/>
+		<h:inputText value="#{empresaBean.empresa.fpas}" maxlength="5" style=" width : 33px;" id="fpas"
+							  					 	   	 converterMessage="Campo FPAS: Apenas números são aceitos">
+		</h:inputText>
+		<h:outputText value="#{inter.iestadual}" style="float: right;"/>
+		<h:inputText value="#{empresaBean.empresa.iestadual}" maxlength="14" style=" width : 100px;" id="iestadual"/>
+		<h:outputText value="*#{inter.responsavel}" style="float: right;"/>
+		<h:selectOneMenu  value="#{empresaBean.empresa.responsavel}" required="true" id="responsavel">
+			<f:selectItems value="#{responsavelBean.listaResponsavel}" />
+			<f:converter converterId="entityConverter"/>
+		</h:selectOneMenu>
+		<h:outputText value="#{inter.telefone}" style="float: right;"/>
+		<h:inputText value="#{empresaBean.empresa.telefone}" maxlength="13" required="false" style=" width : 75px;" id="telefone"/>
+		<h:outputText value="#{inter.celular}" style="float: right;"/>
+		<h:inputText value="#{empresaBean.empresa.celular}" maxlength="13" required="false" style=" width : 75px;" id="celular"/>
+	</h:panelGrid>
+</rich:simpleTogglePanel>
+<rich:spacer height="10px"/>
+<rich:simpleTogglePanel switchType="client" label="Endereço" height="150px" width="350px">
+	<h:panelGrid columns="2">
+		<h:outputText value="#{inter.cep}" style="float: right;"/>
+		<h:inputText value="#{empresaBean.empresa.cep}" maxlength="9" style=" width : 55px;" id="cep">
+			<a4j:support id="carregarEndereco" action="#{empresaBean.carregarEndereco}" event="onblur" reRender="logradouro, bairro, cidade, uf, pais, enderecoFoco"/>
+		</h:inputText>
+		<h:outputText value="#{inter.pais}" style="float: right;"/>
+		<h:inputText value="#{empresaBean.empresa.pais}" maxlength="50" required="false" style=" width : 150px;" id="pais" disabled="#{empresaBean.disableEndereco}"/>
+		<h:outputText value="#{inter.cidade}" style="float: right;"/>
+		<h:inputText value="#{empresaBean.empresa.cidade}" maxlength="100" required="false" style=" width : 150px;" id="cidade" disabled="#{empresaBean.disableEndereco}"/>
+		<h:outputText value="#{inter.bairro}" style="float: right;"/>
+		<h:inputText value="#{empresaBean.empresa.bairro}" maxlength="100" style=" width : 150px;" id="bairro" disabled="#{empresaBean.disableEndereco}"/>
+		<h:outputText value="#{inter.logradouro}" style="float: right;"/>
+		<h:inputText value="#{empresaBean.empresa.logradouro}" maxlength="100" required="false" style=" width : 250px;" id="logradouro" disabled="#{empresaBean.disableEndereco}"/>
+		<h:outputText value="#{inter.numero}" style="float: right;"/>
+		<h:inputText value="#{empresaBean.empresa.numero}" maxlength="5" style=" width : 33px;" id="numero"
+					 converterMessage="Campo Número: Apenas números são aceitos">
+		</h:inputText>
+		<h:outputText value="#{inter.uf}" style="float: right;"/>
+		<h:selectOneMenu  value="#{empresaBean.empresa.uf}" id="uf">
+			<f:selectItems value="#{ufBean.listaUf}" />
+		</h:selectOneMenu>
+	</h:panelGrid>
+</rich:simpleTogglePanel>
+</center>
+	<a4j:loadScript src="/javascript/jquery.maskedinput-1.2.2.js"/>
+</html>

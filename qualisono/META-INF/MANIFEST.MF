@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: qualisono
+Bundle-SymbolicName: qualisono
+Bundle-Version: 1.0.0.qualifier
+Export-Package: br.com.aspect,
+ br.com.bean,
+ br.com.converter,
+ br.com.dao,
+ br.com.dao.utility,
+ br.com.model,
+ br.com.relatorio,
+ br.com.relatorio.jasper,
+ br.com.relatorio.jrxml,
+ br.com.util

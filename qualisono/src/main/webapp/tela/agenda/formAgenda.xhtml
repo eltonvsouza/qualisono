@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+<rich:jQuery timing="onload" selector="#conteudo" query="focus()" />
+<f:loadBundle basename="message" var="inter" />
+	<h:panelGrid columns="2">
+		<h:outputText value="*#{inter.assunto}" style="float: right;"/>
+		<h:selectOneMenu value="#{agendaBean.agenda.assunto}" id="assunto" style=" width : 120px;">
+			<f:selectItems value="#{geralBean.getListaGeralGrupo('assuntoemail')}" />
+		</h:selectOneMenu>
+		<h:outputText value="#{inter.mensagem}" style="float: right;"/>
+		<h:inputText value="#{agendaBean.agenda.mensagem}" maxlength="200" style=" width:250px; align:left;" id="conteudo"/>
+		<h:outputText value="*#{inter.datahora}" style="float: right;"/>
+		<a4j:outputPanel id="datanascimento" layout="block">
+			<rich:calendar value="#{agendaBean.agenda.datahora}"
+				datePattern="dd/MM/yyyy HH:mm" cellWidth="24px" cellHeight="22px"
+				style="width:200px" showApplyButton="true" inputSize="12"/>
+		</a4j:outputPanel>
+		<h:outputText value="*#{inter.email}" style="float: right;"/>
+		<h:inputText value="#{agendaBean.agenda.email}" maxlength="200" style=" width:250px; align:left;" id="email"/>
+	</h:panelGrid>
+</html>

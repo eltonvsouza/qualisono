@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+<f:loadBundle basename="message" var="inter" />
+<rich:jQuery timing="onload" selector="#nnf" query="focus()" />
+<h:panelGrid columns="4" border="0">
+	<h:outputText value="*#{inter.nnf}" style="float: right;"/>
+	<h:panelGrid columns="5">
+		<h:inputText value="#{compraBean.compra.nnf}" maxlength="9" style=" width:80px; align:left;" id="nnf"
+					converterMessage="Campo Número: Apenas números são aceitos"/>
+		<h:outputText value="*#{inter.serie}" style="float: right;"/>
+		<h:inputText value="#{compraBean.compra.serie}" maxlength="3" style=" width:40px; align:left;" id="serie"
+					converterMessage="Campo Série: Apenas números são aceitos"/>
+		<h:outputText value="*#{inter.tipo}" style="float: right;"/>
+		<h:inputText value="#{compraBean.compra.tpNf}" maxlength="1" style=" width:10px; align:left;" id="tpNf"/>
+	</h:panelGrid>
+	<h:outputText value="*#{inter.natop}" style="float: right;"/>
+	<h:inputText value="#{compraBean.compra.natOp}" maxlength="60" style=" width:250px; align:left;" id="natOp"/>
+	<h:outputText value="*#{inter.fornecedor}" style="float: right;"/>
+	<h:selectOneMenu value="#{compraBean.compra.fornecedor}" id="fornecedor" converter="entityConverter" style="width:255px">
+		<f:selectItems value="#{fornecedorBean.listaFornecedor}" />
+		<a4j:support event="onchange" action="#{compraBean.limparLista}" reRender="tbcompraitem, carregarProduto" />
+	</h:selectOneMenu>
+	<h:outputText value="#{inter.transportadora}" style="float: right;" />
+	<h:selectOneMenu value="#{compraBean.compra.transportadora}" id="transportadora" converter="entityConverter" style="width:255px">
+		<f:selectItems value="#{transportadoraBean.listaTransportadora}" />
+	</h:selectOneMenu>
+	<h:outputText value="#{inter.infcpl}" style="float: right;" />
+	<h:inputTextarea value="#{compraBean.compra.infCpl}" maxlength="5000" style=" width:250px; height:56px; align:left;" id="infCpl"/>
+	<h:outputText value="*#{inter.data}" style="float: right;"/>
+	<a4j:outputPanel id="datavenda" layout="block">
+		<rich:calendar value="#{compraBean.compra.data}"
+			datePattern="dd/MM/yyyy" cellWidth="24px" cellHeight="22px"
+			style="width:200px" inputSize="7"/>
+	</a4j:outputPanel>
+</h:panelGrid>
+<h:panelGrid columns="2">
+	<a4j:outputPanel id="tbcompraitem">
+		<rich:dataTable 
+		    onRowMouseOver="this.style.backgroundColor='#F1F1F1'"
+		    onRowMouseOut="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"
+		    cellpadding="0" cellspacing="0"
+		    width="700" border="0" var="compraItens" value="#{compraBean.tbCompraItem}">
+		    <f:facet name="header">
+		        <rich:columnGroup>
+		            <rich:column>
+		                <h:outputText value="#{inter.tbproduto}" />
+		            </rich:column>
+		            <rich:column>
+		                <h:outputText value="#{inter.tbquantidade}" />
+		            </rich:column>
+		            <rich:column>
+		                <h:outputText value="#{inter.tbvtotal}" />
+		            </rich:column>
+		            <rich:column>
+		                <h:outputText value="#{inter.tbbcicms}" />
+		            </rich:column>
+		            <rich:column>
+		                <h:outputText value="#{inter.tbvicms}" />
+		            </rich:column>
+		            <rich:column>
+		                <h:outputText value="#{inter.tbaicms}" />
+		            </rich:column>
+<!--		            <rich:column>-->
+<!--		                <h:outputText value="#{inter.tbvipi}" />-->
+<!--		            </rich:column>-->
+<!--		            <rich:column>-->
+<!--		                <h:outputText value="#{inter.tbaipi}" />-->
+<!--		            </rich:column>-->
+		        </rich:columnGroup>
+		    </f:facet>
+		    <rich:column>
+		    	<h:outputText value="#{compraItens.produto.descricao}" />
+		    </rich:column>
+		    <rich:column>
+		    	<h:outputText value="#{compraItens.quantidade}" />
+		    </rich:column>
+		    <rich:column>
+		    	<h:outputText value="#{compraItens.vtotal}">
+			    	<f:convertNumber pattern="####0.00"/>
+	            </h:outputText>
+		    </rich:column>
+		    <rich:column>
+		    	<h:outputText value="#{compraItens.bcicms}">
+		    		<f:convertNumber pattern="####0.00"/>
+	            </h:outputText>
+		    </rich:column>
+		    <rich:column>
+		    	<h:outputText value="#{compraItens.vicms}">
+		    		<f:convertNumber pattern="####0.00"/>
+	            </h:outputText>
+		    </rich:column>
+		    <rich:column>
+		    	<h:outputText value="#{compraItens.aicms}">
+		    		<f:convertNumber pattern="####0.00"/>
+	            </h:outputText>
+		    </rich:column>
+<!--		    <rich:column>-->
+<!--		    	<h:outputText value="#{compraItens.vipi}">-->
+<!--		    		<f:convertNumber pattern="####0.00"/>-->
+<!--	            </h:outputText>-->
+<!--		    </rich:column>-->
+<!--		    <rich:column>-->
+<!--		    	<h:outputText value="#{compraItens.aipi}">-->
+<!--		    		<f:convertNumber pattern="####0.00"/>-->
+<!--	            </h:outputText>-->
+<!--		    </rich:column>-->
+		    <f:facet name="footer">
+		        <rich:columnGroup>
+		            <rich:column>Total</rich:column>
+		            <rich:column>
+		                <h:outputText value="#{compraBean.tquantidade}"/>
+		            </rich:column>
+		            <rich:column>
+		                <h:outputText value="#{compraBean.tvtotal}">
+		                	<f:convertNumber pattern="####0.00"/>
+	            		</h:outputText>
+		            </rich:column>
+		            <rich:column>
+		                <h:outputText value="#{compraBean.tbcicms}">
+		                	<f:convertNumber pattern="####0.00"/>
+	            		</h:outputText>
+		            </rich:column>
+		            <rich:column>
+		                <h:outputText value="#{compraBean.tvicms}">
+		                	<f:convertNumber pattern="####0.00"/>
+	            		</h:outputText>
+		            </rich:column>
+		            <rich:column>
+		                <h:outputText value="#{compraBean.taicms}">
+		                	<f:convertNumber pattern="####0.00"/>
+	            		</h:outputText>
+		            </rich:column>
+<!--		            <rich:column>-->
+<!--		                <h:outputText value="#{compraBean.tvipi}">-->
+<!--		                	<f:convertNumber pattern="####0.00"/>-->
+<!--	            		</h:outputText>-->
+<!--		            </rich:column>-->
+<!--		            <rich:column>-->
+<!--		                <h:outputText value="#{compraBean.taipi}">-->
+<!--		                	<f:convertNumber pattern="####0.00"/>-->
+<!--	            		</h:outputText>-->
+<!--		            </rich:column>-->
+		        </rich:columnGroup>
+		    </f:facet>
+		</rich:dataTable>
+	</a4j:outputPanel>
+	<a4j:commandLink oncomplete="Richfaces.showModalPanel('mpCompraItem')" ajaxSingle="true" id="add" style="margin-left:auto; margin-right:auto;">
+		<f:setPropertyActionListener value="#produto" target="#{compraBean.foco}" />
+		<h:graphicImage style="border-width:0; left:50%; right:50%; width:16px;" value="#{inter.iconadd}" />
+	</a4j:commandLink>
+	<rich:toolTip value="Adicionar Produto" for="add" followMouse="true"/>
+</h:panelGrid>
+</html>

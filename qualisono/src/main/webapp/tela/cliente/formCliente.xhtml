@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+<rich:jQuery timing="onload" selector="#nome" query="focus()" />
+<!-- MÁSCARAS rich:JQuery -->
+<rich:jQuery query="mask('(99)9999-9999')" selector="#telefone" timing="onload" />
+<rich:jQuery query="mask('(99)9999-9999')" selector="#telefone2" timing="onload" />
+<rich:jQuery query="mask('99999-999')" selector="#cep" timing="onload" />
+<rich:jQuery query="mask('999.999.999-99')" selector="#cpf" timing="onload"/>
+<rich:jQuery query="mask('99.999.999/9999-99')" selector="#cnpj" timing="onload" />
+<f:loadBundle basename="message_pt_BR" var="inter" />
+	<h:panelGrid columns="2">
+		<rich:simpleTogglePanel	switchType="client" label="Dados Pessoais" height="480px" width="390px" >
+			<h:panelGrid columns="2">
+				<h:outputText value="*#{inter.nome}" style="float: right;"/>
+				<h:inputText value="#{clienteBean.cliente.nome}" maxlength="200" style=" width:250px; align:left;" id="nome"/>
+				<h:outputText value="*#{inter.cpf}" style="float: right;"/>
+				<h:inputText value="#{clienteBean.cliente.cpf}" maxlength="14" style=" width:80px; align:left;" id="cpf"/>
+				<h:outputText value="#{inter.datanascimento}" style="float: right;"/>
+				<a4j:outputPanel id="datanascimento" layout="block">
+					<rich:calendar value="#{clienteBean.cliente.datanascimento}"
+						datePattern="dd/MM/yyyy" cellWidth="24px" cellHeight="22px"
+						style="width:200px" inputSize="7"/>
+				</a4j:outputPanel>
+				<h:outputText value="#{inter.datacadastro}" style="float: right;"/>
+				<a4j:outputPanel id="datacadastro" layout="block">
+					<rich:calendar value="#{clienteBean.cliente.datacadastro}"
+						datePattern="dd/MM/yyyy" cellWidth="24px" cellHeight="22px"
+						style="width:200px" inputSize="7"/>
+				</a4j:outputPanel>
+				<h:outputText value="*#{inter.sexo}" style="float: right;" />
+				<h:selectOneRadio value="#{clienteBean.cliente.sexo}" id="sexo">
+					<f:selectItems value="#{geralBean.getListaGeralGrupo('sexo')}" />
+				</h:selectOneRadio>
+				<h:outputText value="#{inter.cnh}" style="float: right;"/>
+				<h:inputText value="#{clienteBean.cliente.cnh}" maxlength="10" style=" width:65px; align:left;" id="cnh"
+					converterMessage="Campo CNH: Apenas números são aceitos"/>
+				<h:outputText value="#{inter.rg}" style="float: right;"/>
+				<h:inputText value="#{clienteBean.cliente.rg}" maxlength="10" style=" width:65px; align:left;" id="rg"/>
+				<h:outputText value="#{inter.orgaoemissor}" style="float: right;"/>
+				<h:inputText value="#{clienteBean.cliente.orgaoemissor}" maxlength="5" style=" width:45px; align:left;" id="orgaoemissor"/>
+				<h:outputText value="#{inter.dataexpedrg}" style="float: right;" />
+				<a4j:outputPanel id="dataexpedrg" layout="block">
+					<rich:calendar value="#{clienteBean.cliente.dataexpedrg}"
+						datePattern="dd/MM/yyyy" cellWidth="24px" cellHeight="22px"
+						style="width:200px" inputSize="7"/>
+				</a4j:outputPanel>
+				<h:outputText value="*#{inter.nomemae}" style="float: right;"/>
+				<h:inputText value="#{clienteBean.cliente.nomemae}" maxlength="200" style=" width:250px; align:left;" id="nomemae"/>
+				<h:outputText value="#{inter.naturalidade}" style="float: right;"/>
+				<h:inputText value="#{clienteBean.cliente.naturalidade}" maxlength="50" style=" width:250px; align:left;" id="naturalidade"/>
+				<h:outputText value="#{inter.ecivil}" style="float: right;" />
+				<h:selectOneMenu value="#{clienteBean.cliente.ecivil}" id="ecivil" style="width : 150px;">
+					<f:selectItems value="#{geralBean.getListaGeralGrupo('estadocivil')}" />
+				</h:selectOneMenu>
+				<h:outputText value="#{inter.dependentes}" style="float: right;"/>
+				<rich:inputNumberSpinner value="#{clienteBean.cliente.dependentes}" maxValue="99" inputSize="2" />
+				<h:outputText value="#{inter.telefone}" style="float: right;"/>
+				<h:inputText value="#{clienteBean.cliente.telefone}" maxlength="13" style=" width:75px; align:left;" id="telefone"/>
+				<h:outputText value="#{inter.telefone}" style="float: right;"/>
+				<h:inputText value="#{clienteBean.cliente.telefone2}" maxlength="13" style=" width:75px; align:left;" id="telefone2"/>
+				<h:outputText value="#{inter.contato}" style="float: right;"/>
+				<h:inputText value="#{clienteBean.cliente.contato}" maxlength="50" style=" width:250px; align:left;" id="contato"/>
+				<h:outputText value="#{inter.email}" style="float: right;"/>
+				<h:inputText value="#{clienteBean.cliente.email}" maxlength="20" style=" width:250px; align:left;" id="email"/>
+			</h:panelGrid>
+		</rich:simpleTogglePanel>
+		<rich:simpleTogglePanel	switchType="client" label="Endereço" height="310px" width="360px">
+			<h:panelGrid columns="2">
+				<h:outputText value="#{inter.cep}" style="float: right;" />
+				<h:inputText value="#{clienteBean.cliente.cep}" maxlength="9"
+					style=" width : 55px;" id="cep">
+	<!--				<a4j:support id="carregarEndereco"-->
+	<!--					action="#{trabalhadorBean.carregarEndereco}" event="onblur"-->
+	<!--					reRender="logradouro, bairro, cidade, uf, pais, enderecoFoco" />-->
+				</h:inputText>
+				 <h:outputText value="#{inter.pais}" style="float: right;" />
+				<h:inputText value="#{clienteBean.cliente.pais}"
+					maxlength="50" style=" width : 50px;" id="pais"
+					/>
+				<h:outputText value="#{inter.cidade}" style="float: right;" />
+				<h:inputText value="#{clienteBean.cliente.cidade}"
+					maxlength="100" style=" width : 100px;" id="cidade"
+					/>
+				<h:outputText value="#{inter.bairro}" style="float: right;" />
+				<h:inputText value="#{clienteBean.cliente.bairro}"
+					maxlength="100" style=" width : 100px;" id="bairro"
+					/>
+				<h:outputText value="#{inter.logradouro}" style="float: right;" />
+				<h:inputText value="#{clienteBean.cliente.logradouro}"
+					maxlength="100" style=" width : 100px;" id="logradouro"
+					/>
+				<h:outputText value="#{inter.numero}" style="float: right;" />
+				<h:inputText value="#{clienteBean.cliente.numero}"
+					maxlength="5" style=" width : 33px;" id="numero"
+					converterMessage="Campo Número: Apenas números são aceitos">
+				</h:inputText>
+				<h:outputText value="#{inter.complemento}" style="float: right;" />
+				<h:inputText value="#{clienteBean.cliente.complemento}"
+					maxlength="100" style=" width : 100px;" id="complemento"/>
+				<h:outputText value="#{inter.uf}" style="float: right;" />
+				<h:selectOneMenu value="#{clienteBean.cliente.uf}" id="uf">
+					<f:selectItems value="#{ufBean.listaUf}" />
+				</h:selectOneMenu>
+				<h:outputText value="#{inter.tiporesid}" style="float: right;"/>
+				<h:inputText value="#{clienteBean.cliente.tiporesid}" maxlength="20" style=" width:250px; align:left;" id="tiporesid"/>
+				<h:outputText value="#{inter.valorresid}" style="float: right;"/>
+				<h:inputText value="#{clienteBean.cliente.valorresid}" maxlength="10" style=" width:250px; align:left;" id="valorresid"/>
+				<h:outputText value="#{inter.temporesid}" style="float: right;"/>
+				<h:inputText value="#{clienteBean.cliente.temporesid}" maxlength="2" style=" width:20px; align:left;" id="temporesid"
+					converterMessage="Campo #{inter.temporesid} Apenas números são aceitos"/>
+			</h:panelGrid>
+		</rich:simpleTogglePanel>
+		<rich:simpleTogglePanel	switchType="client" label="Dados Profissionais" height="200px" width="390px" >
+			<h:panelGrid columns="2">
+				<h:outputText value="#{inter.empresa}" style="float: right;"/>
+				<h:inputText value="#{clienteBean.cliente.empresa}" maxlength="100" style=" width:250px; align:left;" id="empresa"/>
+				<h:outputText value="#{inter.cargo}" style="float: right;"/>
+				<h:inputText value="#{clienteBean.cliente.cargo}" maxlength="100" style=" width:250px; align:left;" id="cargo"/>
+				<h:outputText value="#{inter.profissao}" style="float: right;"/>
+				<h:inputText value="#{clienteBean.cliente.profissao}" maxlength="100" style=" width:250px; align:left;" id="profissao"/>
+				<h:outputText value="#{inter.cnpj}" style="float: right;"/>
+				<h:inputText value="#{clienteBean.cliente.cnpj}" maxlength="18" style=" width:100px; align:left;" id="cnpj"/>
+				<h:outputText value="#{inter.natocupacao}" style="float: right;"/>
+				<h:inputText value="#{clienteBean.cliente.natocupacao}" maxlength="20" style=" width:250px; align:left;" id="natocupacao"/>
+				<h:outputText value="*#{inter.tipocliente}" style="float: right;" />
+				<h:selectOneMenu value="#{clienteBean.cliente.tipocliente}" id="tipocliente" style=" width : 150px;">
+					<f:selectItems value="#{geralBean.getListaGeralGrupo('tipocliente')}" />
+				</h:selectOneMenu>
+				<h:outputText value="*#{inter.ativo}" style="float: right;" />
+				<h:selectBooleanCheckbox value="#{clienteBean.cliente.ativo}" />
+			</h:panelGrid>
+		</rich:simpleTogglePanel>
+		<rich:simpleTogglePanel switchType="client" label="Dados Bancários" height="200px" width="280px">
+			<h:panelGrid columns="2">
+				<h:outputText value="*#{inter.banco}" style="float: right;"/>
+				<h:inputText value="#{clienteBean.cliente.banco}" maxlength="20" style=" width:130px; align:left;" id="banco"/>
+				<h:outputText value="*#{inter.agencia}" style="float: right;"/>
+				<h:inputText value="#{clienteBean.cliente.agencia}" maxlength="15" style=" width:100px; align:left;" id="agencia"/>
+				<h:outputText value="*#{inter.nconta}" style="float: right;"/>
+				<h:inputText value="#{clienteBean.cliente.nconta}" maxlength="15" style=" width:130px; align:left;" id="nconta"/>
+				<h:outputText value="#{inter.cespecial}" style="float: right;" />
+				<h:selectOneRadio value="#{clienteBean.cliente.cespecial}" id="cespecial">
+					<f:selectItem itemLabel="Sim" itemValue="true"/>
+					<f:selectItem itemLabel="Não" itemValue="false"/>
+				</h:selectOneRadio>
+				<h:outputText value="#{inter.ccredito}" style="float: right;" />
+				<h:selectOneRadio value="#{clienteBean.cliente.ccredito}" id="ccredito">
+					<f:selectItem itemLabel="Sim" itemValue="true"/>
+					<f:selectItem itemLabel="Não" itemValue="false"/>
+				</h:selectOneRadio>
+				<h:outputText value="#{inter.dtabertura}" style="float: right;" />
+				<a4j:outputPanel id="dtabertura" layout="block">
+					<rich:calendar value="#{clienteBean.cliente.dtabertura}"
+						datePattern="dd/MM/yyyy" cellWidth="24px" cellHeight="22px"
+						style="width:200px" />
+				</a4j:outputPanel>
+				<h:outputText value="#{inter.afinidade}" style="float: right;"/>
+				<h:inputText value="#{clienteBean.cliente.afinidade}" maxlength="20" style=" width:100px; align:left;" id="afinidade"/> 
+			</h:panelGrid>
+		</rich:simpleTogglePanel>
+	</h:panelGrid>
+</html>

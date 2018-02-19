@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+	<style>
+.optionList {
+	height: 3px;
+}
+
+.vertical-menu-cell {
+	padding: 0px 4px 0px 4px;
+}
+</style>
+
+	<f:loadBundle basename="message" var="inter" />
+	<a4j:form>
+		<h:panelGrid border="0" styleClass="vertical-menu-cell" width="175"
+			bgcolor="#3984BD" columnClasses="optionList" columns="1"
+			cellspacing="0" cellpadding="0">
+			<!--            <rich:dropDownMenu direction="bottom-right" jointPoint="tr" disabled="#{sistemaValidator.disabled}">-->
+			<rich:dropDownMenu direction="bottom-right" jointPoint="tr"
+				disabled="false">
+				<f:facet name="label">
+					<h:panelGroup>
+						<h:panelGrid columns="1" style="margin: 0px auto;">
+							<h:graphicImage value="/imagem/icon/administrador.png"
+								styleClass="pic" width="59" />
+						</h:panelGrid>
+						<h:panelGrid columns="1" style="margin: 0px auto;">
+		                        Administração
+	                        </h:panelGrid>
+					</h:panelGroup>
+				</f:facet>
+				<rich:menuGroup value="Usuário">
+					<rich:menuItem submitMode="ajax" value="#{inter.mcadastrar}"
+						action="#{usuarioBean.carregarCadastrar}"/>
+					<rich:menuItem submitMode="ajax" value="#{inter.mlistar}"
+						action="/tela/usuario/listarUsuario" />
+					<rich:menuSeparator />
+					<rich:menuItem submitMode="ajax" value="Alterar Senha"
+						action="#{usuarioBean.carregarAlterarSenha}" />
+				</rich:menuGroup>
+				<rich:menuGroup value="Configuração">
+					<rich:menuItem submitMode="ajax" value="#{inter.mcadastrar}"
+						action="#{configuracaoBean.carregarCadastrar}" />
+					<rich:menuItem submitMode="ajax" value="#{inter.mlistar}"
+						action="/tela/configuracao/listarConfiguracao" />
+				</rich:menuGroup>
+				<rich:menuItem submitMode="ajax" value="Backup/Restore"
+					action="/tela/backup/backupRestore" />
+			</rich:dropDownMenu>
+			<rich:dropDownMenu direction="bottom-right" jointPoint="tr"
+				disabled="#{sistemaValidator.disabled}">
+				<f:facet name="label">
+					<h:panelGroup>
+						<h:panelGrid columns="1" style="margin: 0px auto;">
+							<h:graphicImage value="/imagem/icon/cadastro.png"
+								styleClass="pic" width="59" />
+						</h:panelGrid>
+						<h:panelGrid columns="1" style="margin: 0px auto;">
+		                        Cadastro
+	                        </h:panelGrid>
+					</h:panelGroup>
+				</f:facet>
+				<rich:menuGroup value="Cliente">
+					<rich:menuItem submitMode="ajax" value="#{inter.mcadastrar}"
+						action="#{clienteBean.carregarCadastrar}" />
+					<rich:menuItem submitMode="ajax" value="#{inter.mlistar}"
+						action="/tela/cliente/listarCliente" />
+				</rich:menuGroup>
+				<rich:menuGroup value="Parceiro">
+					<rich:menuItem submitMode="ajax" value="#{inter.mcadastrar}"
+						action="#{funcionarioBean.carregarCadastrar}" />
+					<rich:menuItem submitMode="ajax" value="#{inter.mlistar}"
+						action="/tela/funcionario/listarFuncionario" />
+				</rich:menuGroup>
+				<rich:menuGroup value="Fornecedor">
+					<rich:menuItem submitMode="ajax" value="#{inter.mcadastrar}"
+						action="#{fornecedorBean.carregarCadastrar}" />
+					<rich:menuItem submitMode="ajax" value="#{inter.mlistar}"
+						action="/tela/fornecedor/listarFornecedor" />
+				</rich:menuGroup>
+				<rich:menuGroup value="Transportadora">
+					<rich:menuItem submitMode="ajax" value="#{inter.mcadastrar}"
+						action="#{transportadoraBean.carregarCadastrar}" />
+					<rich:menuItem submitMode="ajax" value="#{inter.mlistar}"
+						action="/tela/transportadora/listarTransportadora" />
+				</rich:menuGroup>
+				<rich:menuGroup value="Produto">
+					<rich:menuItem submitMode="ajax" value="#{inter.mcadastrar}"
+						action="#{produtoBean.carregarCadastrar}" />
+					<rich:menuItem submitMode="ajax" value="#{inter.mlistar}"
+						action="/tela/produto/listarProduto" />
+				</rich:menuGroup>
+			</rich:dropDownMenu>
+			<rich:dropDownMenu direction="bottom-right" jointPoint="tr">
+				<f:facet name="label">
+					<h:panelGroup>
+						<h:panelGrid columns="1" style="margin: 0px auto;">
+							<h:graphicImage value="/imagem/icon/compra.png" styleClass="pic"
+								width="59" />
+						</h:panelGrid>
+						<h:panelGrid columns="1" style="margin: 0px auto;">
+		                        Compra
+	                       	</h:panelGrid>
+					</h:panelGroup>
+				</f:facet>
+				<rich:menuItem submitMode="ajax" value="#{inter.mcadastrar}"
+					action="#{compraBean.carregarCadastrar}" />
+				<rich:menuItem submitMode="ajax" value="#{inter.mlistar}"
+					action="/tela/compra/listarCompra" />
+			</rich:dropDownMenu>
+			<rich:dropDownMenu direction="bottom-right" jointPoint="tr">
+				<f:facet name="label">
+					<h:panelGroup>
+						<h:panelGrid columns="1" style="margin: 0px auto;">
+							<h:graphicImage value="/imagem/icon/caixa.png" styleClass="pic"
+								width="59" />
+						</h:panelGrid>
+						<h:panelGrid columns="1" style="margin: 0px auto;">
+		                        Venda
+	                        </h:panelGrid>
+					</h:panelGroup>
+				</f:facet>
+				<rich:menuItem submitMode="ajax" value="#{inter.mcadastrar}"
+					action="#{vendaBean.carregarCadastrar}" />
+				<rich:menuItem submitMode="ajax" value="#{inter.mlistar}"
+					action="/tela/venda/listarVenda" />
+			</rich:dropDownMenu>
+			<rich:dropDownMenu direction="bottom-right" jointPoint="tr">
+				<f:facet name="label">
+					<h:panelGroup>
+						<h:panelGrid columns="1" style="margin: 0px auto;">
+							<h:graphicImage value="/imagem/icon/pagar.png" styleClass="pic"
+								width="59" />
+						</h:panelGrid>
+						<h:panelGrid columns="1" style="margin: 0px auto;">
+		                        Contas a Pagar
+	                        </h:panelGrid>
+					</h:panelGroup>
+				</f:facet>
+				<rich:menuItem submitMode="ajax" value="#{inter.mcadastrar}"
+					action="#{contasapagarBean.carregarCadastrar}" />
+				<rich:menuItem submitMode="ajax" value="#{inter.mlistar}"
+					action="/tela/contasapagar/listarContasapagar" />
+			</rich:dropDownMenu>
+			<rich:dropDownMenu direction="bottom-right" jointPoint="tr">
+				<f:facet name="label">
+					<h:panelGroup>
+						<h:panelGrid columns="1" style="margin: 0px auto;">
+							<h:graphicImage value="/imagem/icon/maleta.png" styleClass="pic"
+								width="59" />
+						</h:panelGrid>
+						<h:panelGrid columns="1" style="margin: 0px auto;">
+		                        Utilidades
+	                        </h:panelGrid>
+					</h:panelGroup>
+				</f:facet>
+				<rich:menuGroup value="Agenda">
+					<rich:menuItem submitMode="ajax" value="#{inter.mcadastrar}"
+						action="#{agendaBean.carregarCadastrar}" />
+					<rich:menuItem submitMode="ajax" value="#{inter.mlistar}"
+						action="/tela/agenda/listarAgenda" />
+				</rich:menuGroup>
+				<rich:menuGroup value="Organograma" disabled="true">
+				</rich:menuGroup>
+			</rich:dropDownMenu>
+
+			<rich:dropDownMenu direction="bottom-right" jointPoint="tr">
+				<f:facet name="label">
+					<h:panelGroup>
+						<h:panelGrid columns="1" style="margin: 0px auto;">
+							<h:graphicImage value="#{inter.iconrelatorio}" styleClass="pic"
+								width="59" />
+						</h:panelGrid>
+						<h:panelGrid columns="1" style="margin: 0px auto;">
+		                        Relatório
+	                        </h:panelGrid>
+					</h:panelGroup>
+				</f:facet>
+				<rich:menuGroup value="Geral">
+					<rich:menuItem submitMode="server" value="Usuário" action="#{usuarioBean.relatorioGeral}"/>
+					<rich:menuItem submitMode="server" value="Configuração" action="#{configuracaoBean.relatorioGeral}"/>
+					<rich:menuItem submitMode="server" value="Cliente" action="#{clienteBean.relatorioGeral}"/>
+					<rich:menuItem submitMode="server" value="Parceiro" action="#{funcionarioBean.relatorioGeral}"/>
+					<rich:menuItem submitMode="server" value="Fornecedor" action="#{fornecedorBean.relatorioGeral}"/>
+					<rich:menuItem submitMode="server" value="Transportadora" action="#{transportadoraBean.relatorioGeral}" />
+					<rich:menuItem submitMode="server" value="Produto" action="#{produtoBean.relatorioGeral}"/>
+					<rich:menuItem submitMode="server" value="Compra" action="#{compraBean.relatorioGeral}"/>
+					<rich:menuItem submitMode="server" value="Venda" action="#{vendaBean.relatorioGeral}"/>
+					<rich:menuItem submitMode="server" value="Contas a Pagar" action="#{contasapagarBean.relatorioGeral}"/>
+					<rich:menuItem submitMode="server" value="Agenda" action="#{agendaBean.relatorioGeral}"/>
+				</rich:menuGroup>
+				<rich:menuGroup value="Compra" disabled="true">
+				</rich:menuGroup>
+			</rich:dropDownMenu>
+		</h:panelGrid>
+	</a4j:form>
+</ui:composition>

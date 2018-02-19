@@ -1,0 +1,3 @@
+<center xmlns:rich="http://richfaces.org/rich">
+	<rich:messages errorStyle="color: red" infoStyle="color:green" id="mensagem"/>
+</center>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">root</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/qualisono</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="hibernate.show_sql">true</property>
+<!-- Configurações do pool -->
+		<property name="hibernate.c3p0.min_size">10</property>
+		<property name="hibernate.c3p0.max_size">100</property>
+		<property name="hibernate.c3p0.timeout">100</property>
+		<property name="hibernate.c3p0.idle_test_period">100</property>
+		<property name="hibernate.c3p0.acquire_increment">1</property>
+		<property name="hibernate.c3p0.max_statements">0</property>
+
+		<mapping class="br.com.model.Agenda" />
+		<mapping class="br.com.model.Cliente" />
+		<mapping class="br.com.model.Compra" />
+		<mapping class="br.com.model.CompraItem" />
+		<mapping class="br.com.model.Configuracao" />
+		<mapping class="br.com.model.Contasapagar" />
+		<mapping class="br.com.model.Fornecedor" />
+		<mapping class="br.com.model.Funcionario" />
+		<mapping class="br.com.model.Geral" />
+		<mapping class="br.com.model.Parcelasapagar" />
+		<mapping class="br.com.model.Produto" />
+		<mapping class="br.com.model.TipoFuncionario" />
+		<mapping class="br.com.model.Transportadora" />
+		<mapping class="br.com.model.Uf" />
+		<mapping class="br.com.model.Unidade" />
+		<mapping class="br.com.model.Usuario" />
+		<mapping class="br.com.model.Venda" />
+		<mapping class="br.com.model.VendaItem" />
+	</session-factory>
+</hibernate-configuration>

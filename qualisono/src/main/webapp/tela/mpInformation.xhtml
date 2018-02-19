@@ -1,0 +1,22 @@
+<f:subview
+	  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"> 
+	<a4j:form>
+	<rich:modalPanel id="mpInformation" width="350" height="100">
+      	<f:facet name="header">
+            <h:panelGroup>
+                <h:outputText value="CENG - Mensagem"></h:outputText>
+            </h:panelGroup>
+        </f:facet>
+	    <a4j:outputPanel ajaxRendered="true">
+			<h:outputText value="#{modalPanelInformation.mensagem}"></h:outputText>
+      	</a4j:outputPanel>
+		<br/>
+		<center><a4j:commandButton reRender="cadastro" onclick="Richfaces.hideModalPanel('mpInformation');" value="Fechar"/></center>
+    </rich:modalPanel>
+	</a4j:form>
+</f:subview>

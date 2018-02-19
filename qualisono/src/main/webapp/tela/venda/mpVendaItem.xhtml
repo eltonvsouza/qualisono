@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<f:subview
+	  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"> 
+	
+<rich:modalPanel id="mpVendaItem" width="300" height="300">
+	<f:facet name="header">
+	    <h:panelGroup>
+	        <h:outputText value="#{inter.tcadastrar} - #{inter.tvenda} - #{inter.tproduto}"></h:outputText>
+	    </h:panelGroup>
+	</f:facet>
+	<a4j:form ajaxSingle="true">
+    	<h:panelGrid columns="2">
+			<h:outputText value="*#{inter.produto}" style="float: right;"/>
+			<a4j:outputPanel id="carregarProduto">
+				<h:selectOneMenu value="#{vendaBean.vendaItem.produto}" style="width:170px" id="produto" converter="entityConverter">
+			        <f:selectItems value="#{produtoBean.listaProduto}"/>
+			    </h:selectOneMenu>
+		    </a4j:outputPanel>
+			<h:outputText value="*#{inter.quantidade}" style="float: right;"/>
+			<h:inputText value="#{vendaBean.vendaItem.quantidade}" maxlength="10" style=" width:100px; align:left;" id="quantidade"/>
+   		</h:panelGrid>
+		<rich:simpleTogglePanel switchType="client"	label="Desconto" height="60px" width="230px" opened="false" style="margin-left : auto; margin-right : auto;">
+			<h:panelGrid columns="2">
+				<h:outputText value="#{inter.tipo}" style="float: right;"/>
+				<h:selectOneRadio value="#{vendaBean.vendaItem.tipodesconto}" id="tipodesconto">
+					<f:selectItems value="#{geralBean.getListaGeralGrupo('tipodesconto')}" />
+				</h:selectOneRadio>
+				<h:outputText value="#{inter.valor}" style="float: right;"/>
+				<h:inputText value="#{vendaBean.vendaItem.desconto}" maxlength="12" style=" width:100px; align:left;" id="desconto" converter="doubleConverter" converterMessage="Campo Desconto: Utilize duas casas decimais (0.00)"/>
+			</h:panelGrid>
+		</rich:simpleTogglePanel>
+		<rich:spacer height="10px"/>
+		<rich:panel style=" width : 145px; margin-left : auto; margin-right : auto;">
+			<a4j:commandButton actionListener="#{vendaBean.addItem}" value="Adicionar" reRender="tbvendaitem"/>
+			<rich:spacer width="5px"/>
+			<a4j:commandButton onclick="Richfaces.hideModalPanel('mpVendaItem');" value="Fechar"/>
+		</rich:panel>
+		<ui:include src="/tela/mensagem/mensagem.xhtml" />
+	</a4j:form>
+</rich:modalPanel>
+</f:subview>

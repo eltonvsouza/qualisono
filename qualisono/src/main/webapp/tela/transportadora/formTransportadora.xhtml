@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+<rich:jQuery query="mask('99.999.999/9999-99')" selector="#cnpj" timing="onload"/>
+<rich:jQuery query="mask('99.999.999/9999-99')" selector="#inscestadual" timing="onload" />
+<rich:jQuery query="mask('(99)9999-9999')" selector="#telefone" timing="onload" />
+<rich:jQuery query="mask('(99)9999-9999')" selector="#fax" timing="onload" />
+<rich:jQuery query="mask('99999-999')" selector="#cep" timing="onload" />
+<f:loadBundle basename="message" var="inter" />
+<rich:jQuery timing="onload" selector="#cnpj" query="focus()" />
+<h:panelGrid columns="2">
+	<rich:simpleTogglePanel switchType="client" label="Dados Empresariais"
+		height="200px" width="385px">
+		<h:panelGrid columns="2">
+			<h:outputText value="*#{inter.cnpj}" style="float: right;" />
+			<a4j:outputPanel id="panelInscr">
+				<h:inputText value="#{transportadoraBean.transportadora.cnpj}" maxlength="18"
+					style=" width:100px; align:left;" id="cnpj" />
+			</a4j:outputPanel>
+			<h:outputText value="*#{inter.inscestadual}" style="float: right;" />
+			<h:inputText value="#{transportadoraBean.transportadora.inscestadual}"
+				maxlength="14" style=" width:100px; align:left;" id="inscestadual" />
+			<h:outputText value="*#{inter.nome}" style="float: right;" />
+			<h:inputText value="#{transportadoraBean.transportadora.nome}" maxlength="200"
+				style=" width:250px; align:left;" id="nome" />
+			<h:outputText value="#{inter.telefone}" style="float: right;" />
+			<h:inputText value="#{transportadoraBean.transportadora.telefone}" maxlength="13"
+				style=" width:75px; align:left;" id="telefone" />
+			<h:outputText value="#{inter.fax}" style="float: right;" />
+			<h:inputText value="#{transportadoraBean.transportadora.fax}" maxlength="13"
+				style=" width:75px; align:left;" id="fax" />
+			<h:outputText value="#{inter.contato}" style="float: right;" />
+			<h:inputText value="#{transportadoraBean.transportadora.contato}" maxlength="50"
+				style=" width:250px; align:left;" id="contato" />
+			<h:outputText value="#{inter.email}" style="float: right;" />
+			<h:inputText value="#{transportadoraBean.transportadora.email}" maxlength="20"
+				style=" width:250px; align:left;" id="email" />
+		</h:panelGrid>
+	</rich:simpleTogglePanel>
+	<rich:simpleTogglePanel switchType="client" label="Dados Bancários" height="200px" width="280px">
+		<h:panelGrid columns="2">
+			<h:outputText value="*#{inter.banco}" style="float: right;"/>
+			<h:inputText value="#{transportadoraBean.transportadora.banco}" maxlength="20" style=" width:130px; align:left;" id="banco"/>
+			<h:outputText value="*#{inter.agencia}" style="float: right;"/>
+			<h:inputText value="#{transportadoraBean.transportadora.agencia}" maxlength="15" style=" width:100px; align:left;" id="agencia"/>
+			<h:outputText value="*#{inter.nconta}" style="float: right;"/>
+			<h:inputText value="#{transportadoraBean.transportadora.nconta}" maxlength="15" style=" width:130px; align:left;" id="nconta"/>
+			<h:outputText value="#{inter.cespecial}" style="float: right;" />
+			<h:selectOneRadio value="#{transportadoraBean.transportadora.cespecial}" id="cespecial">
+				<f:selectItem itemLabel="Sim" itemValue="true"/>
+				<f:selectItem itemLabel="Não" itemValue="false"/>
+			</h:selectOneRadio>
+			<h:outputText value="#{inter.dtabertura}" style="float: right;" />
+			<a4j:outputPanel id="dtabertura" layout="block">
+				<rich:calendar value="#{transportadoraBean.transportadora.dtabertura}"
+					datePattern="dd/MM/yyyy" cellWidth="24px" cellHeight="22px"
+					style="width:200px" inputSize="7"/>
+			</a4j:outputPanel>
+			<h:outputText value="#{inter.ccredito}" style="float: right;" />
+			<h:selectOneRadio value="#{transportadoraBean.transportadora.ccredito}" id="ccredito">
+				<f:selectItem itemLabel="Sim" itemValue="true"/>
+				<f:selectItem itemLabel="Não" itemValue="false"/>
+			</h:selectOneRadio>
+			<h:outputText value="#{inter.afinidade}" style="float: right;"/>
+			<h:inputText value="#{transportadoraBean.transportadora.afinidade}" maxlength="20" style=" width:100px; align:left;" id="afinidade"/>
+		</h:panelGrid>
+	</rich:simpleTogglePanel>
+	<rich:simpleTogglePanel switchType="client" label="Endereço"
+		height="230px" width="385px">
+		<h:panelGrid columns="2">
+			<h:outputText value="#{inter.cep}" style="float: right;" />
+			<h:inputText value="#{transportadoraBean.transportadora.cep}" maxlength="9"
+				style=" width : 55px;" id="cep">
+				<!--				<a4j:support id="carregarEndereco"-->
+				<!--					action="#{trabalhadorBean.carregarEndereco}" event="onblur"-->
+				<!--					reRender="logradouro, bairro, cidade, uf, pais, enderecoFoco" />-->
+			</h:inputText>
+			<h:outputText value="#{inter.pais}" style="float: right;" />
+			<h:inputText value="#{transportadoraBean.transportadora.pais}" maxlength="50"
+				style=" width : 150px;" id="pais"
+				disabled="#{trabalhadorBean.disableEndereco}" />
+			<h:outputText value="#{inter.cidade}" style="float: right;" />
+			<h:inputText value="#{transportadoraBean.transportadora.cidade}" maxlength="100"
+				style=" width : 150px;" id="cidade"
+				disabled="#{trabalhadorBean.disableEndereco}" />
+			<h:outputText value="#{inter.bairro}" style="float: right;" />
+			<h:inputText value="#{transportadoraBean.transportadora.bairro}" maxlength="100"
+				style=" width : 150px;" id="bairro"
+				disabled="#{trabalhadorBean.disableEndereco}" />
+			<h:outputText value="#{inter.logradouro}" style="float: right;" />
+			<h:inputText value="#{transportadoraBean.transportadora.logradouro}" maxlength="100"
+				style=" width : 250px;" id="logradouro"
+				disabled="#{trabalhadorBean.disableEndereco}" />
+			<h:outputText value="#{inter.numero}" style="float: right;" />
+			<h:inputText value="#{transportadoraBean.transportadora.numero}" maxlength="5"
+				style=" width : 33px;" id="numero"
+				converterMessage="Campo Número: Apenas números são aceitos">
+			</h:inputText>
+			<h:outputText value="#{inter.complemento}" style="float: right;" />
+			<h:inputText value="#{transportadoraBean.transportadora.complemento}"
+				maxlength="100" style=" width : 150px;" id="complemento" />
+			<h:outputText value="#{inter.uf}" style="float: right;" />
+			<h:selectOneMenu value="#{transportadoraBean.transportadora.uf}" id="uf">
+				<f:selectItems value="#{ufBean.listaUf}" />
+			</h:selectOneMenu>
+		</h:panelGrid>
+	</rich:simpleTogglePanel>
+</h:panelGrid>
+</html>

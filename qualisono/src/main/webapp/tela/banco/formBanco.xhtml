@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+<f:loadBundle basename="message" var="inter" />
+<rich:jQuery timing="onload" selector="#cnpj" query="focus()" />
+<h:panelGrid columns="2">
+	<rich:simpleTogglePanel switchType="client" label="Dados Bancários" height="200px" width="400px">
+		<h:panelGrid columns="2">
+			<h:outputText value="#{inter.banco}" style="float: right;"/>
+			<h:inputText value="#{bancoBean.banco.banco}" maxlength="20" style=" width:250px; align:left;" id="banco"/>
+			<h:outputText value="#{inter.agencia}" style="float: right;"/>
+			<h:inputText value="#{bancoBean.banco.agencia}" maxlength="15" style=" width:250px; align:left;" id="agencia"/>
+			<h:outputText value="#{inter.nconta}" style="float: right;"/>
+			<h:inputText value="#{bancoBean.banco.nconta}" maxlength="20" style=" width:250px; align:left;" id="nconta"/>
+			<h:outputText value="*#{inter.cespecial}" style="float: right;" />
+			<h:selectOneRadio value="#{bancoBean.banco.cespecial}" id="cespecial">
+				<f:selectItem itemLabel="Sim" itemValue="true"/>
+				<f:selectItem itemLabel="Não" itemValue="false"/>
+			</h:selectOneRadio>
+			<h:outputText value="#{inter.ccredito}" style="float: right;" />
+			<h:selectOneRadio value="#{bancoBean.banco.ccredito}" id="ccredito">
+				<f:selectItem itemLabel="Sim" itemValue="true"/>
+				<f:selectItem itemLabel="Não" itemValue="false"/>
+			</h:selectOneRadio>
+			<h:outputText value="#{inter.dtabertura}" style="float: right;" />
+			<a4j:outputPanel id="dtabertura" layout="block">
+				<rich:calendar value="#{bancoBean.banco.dtabertura}"
+					datePattern="dd/MM/yyyy" cellWidth="24px" cellHeight="22px"
+					style="width:200px" />
+			</a4j:outputPanel>
+			<h:outputText value="#{inter.afinidade}" style="float: right;"/>
+			<h:inputText value="#{bancoBean.banco.afinidade}" maxlength="50" style=" width:250px; align:left;" id="afinidade"/>
+		</h:panelGrid>
+	</rich:simpleTogglePanel>
+</h:panelGrid>
+</html>
